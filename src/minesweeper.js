@@ -1,8 +1,8 @@
-/*const printBoard = board => {
+const printBoard = board => {
   console.log('Current Board: ');
-  console.log(board[0].join(' | '));
-  console.log(board[1].join(' | '));
-  console.log(board[2].join(' | '));
+  for (let r = 0; r < board.length; r++) {
+    console.log(board[r].join(' | '));
+}
 };
 
 const board = [
@@ -13,17 +13,54 @@ const board = [
 
 printBoard(board);
 
+
 board[0][1] = "1";
 board[2][2] = "B";
-printBoard(board);*/
+printBoard(board);
 
-const generatePlayerBoard = (numberOfRows, numberofColumns) => {
-  let board = [5,5];
-  for (let row = 0; row < numberOfRows.length; row++) {
-    for (let columns = 0; columns < numberOfColumns.length; columns++);
-  row.push(' '); }
-  columns.push(' ');
-  return board();
+const generatePlayerBoard = (rows, cols) => {
+  let board = [];
+  for (let r = 0; r < rows; r++) {
+    let row = [  ];
+    for (let c = 0; c < cols; c++) {
+      let col = ' '
+      row.push(col);
+    }
+    board.push(row);
+  }
+  return board
 };
 
-console.log(generatePlayerBoard(board));
+console.log(generatePlayerBoard(5,5));
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() *
+  (max - min + 1)) + min; }
+
+
+const generateBombBoard = (rows, cols, bombs) => {
+  let board = [ ];
+  for (let r = 0; r < rows; r++) {
+    let row = [  ];
+    for (let c = 0; c < cols; c++) {
+      let col = ' '
+      row.push(col);
+    }
+    board.push(row);
+  }
+    for (let b = 0; b < bombs; b++) {
+      let bomb = 'B'
+      bombPlaced = false;
+      while (!bombPlaced){
+        let bombRow = getRandomInt(0, rows - 1);
+        let bombCol = getRandomInt(0, cols - 1);
+        if (board[bombRow][bombCol] == ' ' ) {
+          board[bombRow][bombCol]= bomb;
+          bombPlaced = true;
+        }
+      }
+    }
+ return board
+};
+
+printBoard(generateBombBoard(5,5,3));
